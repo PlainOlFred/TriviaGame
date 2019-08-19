@@ -1,17 +1,25 @@
 $(document).ready(function(){
 
-    const qusFact = function(qus, ans){
+    const qusFact = function(qus, ans, wro1, wro2, wro3){
         let q = qus;
         let a = ans;
+        let w1 = wro1;
+        let w2 = wro2;
+        let w3 = wro3;
 
         return{
             qus:q,
             ans:a,
+            wro1: w1,
+            wro2: w2,
+            wro3: w3
         }
     }
     
-    let qus1 = qusFact('What is best band','rush')
-    let qus2 = qusFact('whos saw it', 'me' )
+    let qus1 = qusFact('What is best band','rush','not rush', 'not rush', 'not rush')
+    let qus2 = qusFact('whos saw it', 'me' , 'me', 'me' , 'me')
+
+    qusBank = [qus1, qus2]
     
     console.log(qus1.qus)
     console.log(qus1.ans)
@@ -20,8 +28,8 @@ $(document).ready(function(){
 
 
 
-    //click to start
-    let gameStart = false;
+    
+    let gameStart=false;;
     const timer = new Array(101).fill(0).map((x,index) => index).reverse()
     
 
@@ -30,18 +38,30 @@ $(document).ready(function(){
         
     }
 
+    let oneRound= function(){
+        countDown()
+        setTimeout(()=>{$('#qusAnsText').html(`<h1>${qus1.qus}</h1`)}, 250)
+        let randomQuestion = qusBank[Math.floor(Math.random *2)]
+        
+            
+           
+    }
+
     let gameReady =function(){
-        gameStart=true
         $(this).html('<h4>Ready...</h4>').unbind()
         setTimeout(()=>{$('#clockButton').html('<h4>Set...<h4>')}, 1000)
         setTimeout(()=>{$('#clockButton').html('<h4>Go!!!</h4>')}, 1750)
-        setTimeout(()=> countDown(), 2000)
+        setTimeout(()=> oneRound(), 2000)
+        gameStart=true;
+        
     }
+
+    
 
     // setInterval(()=>timer.forEach((x)=>{x;console.log(x)}), 1000)
      
      
-    
+    //click to start
     $('#clockButton').click(gameReady)
 
     

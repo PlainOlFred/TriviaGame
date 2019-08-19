@@ -26,6 +26,9 @@ div
     text-align: center
 
 }
+.ansOption:hover{
+    border: 2px solid red
+}
 
 
 
