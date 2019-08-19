@@ -31,6 +31,15 @@ $(document).ready(function(){
         
     }
 
+    let gameReady =function(){
+        $(this).html('<h4>Ready...</h4>').unbind(); console.log('this :' +this)
+        setTimeout(()=>{$('#clockButton').html('<h4>Set...<h4>')}, 1000)
+        setTimeout(()=>{$('#clockButton').html('<h4>Go!!!</h4>')}, 1750)
+        setTimeout(()=> oneRound(), 2000)
+        gameStart=true;
+        
+    }
+
     let oneRound= function(){
         countDown()
         rnQus = Math.floor(Math.random()*qusBank.length)
@@ -38,13 +47,13 @@ $(document).ready(function(){
         
         
         //randominize
-        let newArr = [qusBank[rnQus].ans, qusBank[rnQus].wro1, qusBank[rnQus].wro2, qusBank[rnQus].wro3]
-        
+        let rdArr = [qusBank[rnQus].ans, qusBank[rnQus].wro1, qusBank[rnQus].wro2, qusBank[rnQus].wro3]
+        let rdAns = rdArr[0]
         let rnQusArr=[]; 
         do{
-            rnQusArr.push(newArr.splice(Math.floor(Math.random()*newArr.length),1))
+            rnQusArr.push(rdArr.splice(Math.floor(Math.random()*rdArr.length),1))
 
-        } while(newArr.length >0)
+        } while(rdArr.length >0)
 
         
         console.log(rnQusArr)
@@ -58,7 +67,13 @@ $(document).ready(function(){
         setTimeout(()=>{$('#ansOptions4').text(rnQusArr[3])}, 500)
 
         $('.ansOption').click(function(){
-            let userguess = $(this)
+            let userGuess = $(this).text()
+            if(userGuess===rdAns){
+                console.log('correct')
+            }else
+            console.log ('wrong. Correct Answer: '+ rdAns)
+
+
 
             
         })
@@ -68,14 +83,7 @@ $(document).ready(function(){
            
     }
 
-    let gameReady =function(){
-        $(this).html('<h4>Ready...</h4>').unbind(); console.log('this :' +this)
-        setTimeout(()=>{$('#clockButton').html('<h4>Set...<h4>')}, 1000)
-        setTimeout(()=>{$('#clockButton').html('<h4>Go!!!</h4>')}, 1750)
-        setTimeout(()=> oneRound(), 2000)
-        gameStart=true;
-        
-    }
+    
 
     
 
