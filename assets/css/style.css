@@ -1,0 +1,40 @@
+div
+{border: 2px solid black}
+
+
+
+#gameBox{
+    height: 60%;
+    width: 80%;
+    margin:  0 auto;
+    padding: 50px;
+    
+    
+}
+
+#gameBox > *{
+    margin: 30px;
+}
+
+#qusAnsText{
+    text-align: center;
+}
+
+#clockButton{
+    text-align: center
+    
+   
+}
+
+#ansOptions{
+    border: 2px solid red;
+    text-align: center
+
+}
+
+
+
+
+
+
+ 
