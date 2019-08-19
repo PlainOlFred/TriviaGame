@@ -40,7 +40,17 @@ $(document).ready(function(){
 
     let oneRound= function(){
         countDown()
-        setTimeout(()=>{$('#qusAnsText').html(`<h1>${qusBank[Math.floor(Math.random()*2)].qus}</h1`)}, 250)
+        rnqus = Math.floor(Math.random()*qusBank.length)
+        setTimeout(()=>{$('#qusAnsText').html(`<h1>${qusBank[rnqus].qus}</h1`)}, 250)
+        setTimeout(()=>{$('#ansOptions1').text(qusBank[rnqus].wro1)}, 500)
+        setTimeout(()=>{$('#ansOptions2').text(qusBank[rnqus].ans)}, 500)
+        setTimeout(()=>{$('#ansOptions3').text(qusBank[rnqus].wro2)}, 500)
+        setTimeout(()=>{$('#ansOptions4').text(qusBank[rnqus].wro3)}, 500)
+
+        $('.ansOption').click(function(){
+            let userguess = 0
+            
+        })
         
         
             
@@ -48,7 +58,7 @@ $(document).ready(function(){
     }
 
     let gameReady =function(){
-        $(this).html('<h4>Ready...</h4>').unbind()
+        $(this).html('<h4>Ready...</h4>').unbind(); console.log('this :' +this)
         setTimeout(()=>{$('#clockButton').html('<h4>Set...<h4>')}, 1000)
         setTimeout(()=>{$('#clockButton').html('<h4>Go!!!</h4>')}, 1750)
         setTimeout(()=> oneRound(), 2000)
@@ -66,10 +76,7 @@ $(document).ready(function(){
 
     
 
-    $('.ansOption').click(function(){
-        console.log('triva');
-        
-    })
+   
     // setInterval(()=>console.log('hi'), 1000)
     
 })
