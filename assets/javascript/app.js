@@ -40,8 +40,8 @@ $(document).ready(function(){
 
     let oneRound= function(){
         countDown()
-        setTimeout(()=>{$('#qusAnsText').html(`<h1>${qus1.qus}</h1`)}, 250)
-        let randomQuestion = qusBank[Math.floor(Math.random *2)]
+        setTimeout(()=>{$('#qusAnsText').html(`<h1>${qusBank[Math.floor(Math.random()*2)].qus}</h1`)}, 250)
+        
         
             
            
