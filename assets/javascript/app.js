@@ -16,8 +16,8 @@ $(document).ready(function(){
         }
     }
     
-    let qus1 = qusFact('What is best band','rush','not rush1', 'not rush2', 'not rush3')
-    let qus2 = qusFact('whos saw it', 'me' , 'not me1', 'not me2' , 'not me3')
+    let qus1 = qusFact('What is best band','Rush','not rush1', 'not rush2', 'not rush3')
+    let qus2 = qusFact('whos saw it', 'Me' , 'not me1', 'not me2' , 'not me3')
 
     qusBank = [qus1, qus2]
 
@@ -36,13 +36,12 @@ $(document).ready(function(){
         setTimeout(()=>{$('#clockButton').html('<h4>Set...<h4>')}, 1000)
         setTimeout(()=>{$('#clockButton').html('<h4>Go!!!</h4>')}, 1750)
         setTimeout(()=> oneRound(), 2000)
-        gameStart=true;
-        
+        gameStart=true;  
     }
 
     let oneRound= function(){
         countDown()
-        rnQus = Math.floor(Math.random()*qusBank.length)
+        rnQus = Math.floor(Math.random()*qusBank.length)//random number for the question number
         setTimeout(()=>{$('#qusAnsText').html(`<h1>${qusBank[rnQus].qus}</h1`)}, 250)
         
         
@@ -56,10 +55,11 @@ $(document).ready(function(){
         } while(rdArr.length >0)
 
         
-        console.log(rnQusArr)
+        console.log(rnQusArr);
+        qusBank.splice(qusBank[rnQus], 1)//removes current question from qusBank
+        console.log('After splice' +qusBank[1]);
         
-
-
+        
 
         setTimeout(()=>{$('#ansOptions1').text(rnQusArr[0])}, 500) 
         setTimeout(()=>{$('#ansOptions2').text(rnQusArr[2])}, 500)
@@ -69,14 +69,12 @@ $(document).ready(function(){
         $('.ansOption').click(function(){
             let userGuess = $(this).text()
             if(userGuess===rdAns){
-                console.log('correct')
+                setTimeout(()=>{$('#qusAnsText').html(`<h1>Correct</h1`)}, 250)
             }else
-            console.log ('wrong. Correct Answer: '+ rdAns)
+            setTimeout(()=>{$('#qusAnsText').html(`<h1>Wrong. Wrong. Wrong: Correct Answer is ${rdAns}</h1>` )}, 250)
 
-
-
-            
         })
+        //end of roud Modals
         
         
             
