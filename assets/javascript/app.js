@@ -30,7 +30,9 @@ $(document).ready(function(){
     const timer = new Array(10).fill(0).map((x,index) => index).reverse()
     let countDown = function(){
         setInterval(()=>$('#clockButton').text(timer.shift()), 1000)
-        
+    }
+    let stopCountDown = function (){
+
     }
 
     let gameReady =function(){
@@ -52,28 +54,28 @@ $(document).ready(function(){
     let oneRound= function(){
         countDown()
         rnQus = Math.floor(Math.random()*qusBank.length)//random number for the question number
-        setTimeout(()=>{$('#qusAnsText').html(`<h1>${qusBank[rnQus].qus}</h1`)}, 500)
+        $('#qusAnsText').html(`<h1>${qusBank[rnQus].qus}</h1`)
         
         let rdArr = [qusBank[rnQus].ans, qusBank[rnQus].wro1, qusBank[rnQus].wro2, qusBank[rnQus].wro3]
         let rdAns = rdArr[0]//this round answer
         
     
-        setTimeout(()=>{$('#ansOptions1').text(rdArr[0])}, 500) 
-        setTimeout(()=>{$('#ansOptions2').text(rdArr[2])}, 500)
-        setTimeout(()=>{$('#ansOptions3').text(rdArr[1])}, 500)
-        setTimeout(()=>{$('#ansOptions4').text(rdArr[3])}, 500)
+        $('#ansOptions1').text(rdArr[0])
+        $('#ansOptions2').text(rdArr[2])
+        $('#ansOptions3').text(rdArr[1])
+        $('#ansOptions4').text(rdArr[3])
 
         $('.ansOption').click(function(){
             
             let userGuess = $(this).text()
             if(userGuess===rdAns){
                 setTimeout(()=>{$('#qusAnsText').html(`<h1>Correct</h1`);
-                clearTimeout(countDown)
                 $('#actionBox').text('celebrate fool')}, 250)
-                setTimeout(oneRound(), 3000)
+
+                
             }else {
                 setTimeout(()=>{$('#qusAnsText').html(`Wrong: Correct Answer is ${rdAns}</h1>` )}, 250);
-                $('#actionBox').text('celebrate fool')
+                $('#actionBox').text('youfool')
             }
             
 
@@ -89,19 +91,11 @@ $(document).ready(function(){
            
     }
 
-    
 
-    
 
-    // setInterval(()=>timer.forEach((x)=>{x;console.log(x)}), 1000)
      
      
     //click to start
     $('#clockButton').click(gameReady)
-
-    
-
-   
-    // setInterval(()=>console.log('hi'), 1000)
     
 })
