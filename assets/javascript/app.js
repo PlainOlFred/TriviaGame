@@ -44,6 +44,7 @@ $(document).ready(function(){
     //end of roud Modals
     function oneRoundModal(){
         $('.ansOption').attr('disabled','disabled')
+        $('#roundModal').css('display', 'block')
 
     }
     
@@ -56,32 +57,30 @@ $(document).ready(function(){
         let rdArr = [qusBank[rnQus].ans, qusBank[rnQus].wro1, qusBank[rnQus].wro2, qusBank[rnQus].wro3]
         let rdAns = rdArr[0]//this round answer
         
-        
-        //randominize
-        let rnQusArr=[]; 
-
-        do{
-            rnQusArr.push(rdArr.splice(Math.floor(Math.random()*rdArr.length),1))
-        } while(rdArr.length >0)
-
-        setTimeout(()=>{$('#ansOptions1').text(rnQusArr[0])}, 500) 
-        setTimeout(()=>{$('#ansOptions2').text(rnQusArr[2])}, 500)
-        setTimeout(()=>{$('#ansOptions3').text(rnQusArr[1])}, 500)
-        setTimeout(()=>{$('#ansOptions4').text(rnQusArr[3])}, 500)
+    
+        setTimeout(()=>{$('#ansOptions1').text(rdArr[0])}, 500) 
+        setTimeout(()=>{$('#ansOptions2').text(rdArr[2])}, 500)
+        setTimeout(()=>{$('#ansOptions3').text(rdArr[1])}, 500)
+        setTimeout(()=>{$('#ansOptions4').text(rdArr[3])}, 500)
 
         $('.ansOption').click(function(){
             
             let userGuess = $(this).text()
             if(userGuess===rdAns){
-                setTimeout(()=>{$('#qusAnsText').html(`<h1>Correct</h1`)}, 250)
-            }else
-            setTimeout(()=>{$('#qusAnsText').html(`<h1>Wrong. Wrong. Wrong: Correct Answer is ${rdAns}</h1>` )}, 250)
+                setTimeout(()=>{$('#qusAnsText').html(`<h1>Correct</h1`);
+                clearTimeout(countDown)
+                $('#actionBox').text('celebrate fool')}, 250)
+                setTimeout(oneRound(), 3000)
+            }else {
+                setTimeout(()=>{$('#qusAnsText').html(`Wrong: Correct Answer is ${rdAns}</h1>` )}, 250);
+                $('#actionBox').text('celebrate fool')
+            }
             
 
+
+
+
             qusBank.splice(rnQus,1)
-
-            oneRoundModal()
-
         })
        
         
