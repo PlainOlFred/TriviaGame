@@ -72,6 +72,7 @@ $(document).ready(function(){
        
         $('.ansOption').click(function(){
             timer()
+            clearTimeout(roundTime)
             let userGuess = $(this).text()
             
             if(userGuess == rdAns && time >0){
@@ -87,6 +88,7 @@ $(document).ready(function(){
 
             }else{
                 setTimeout(function(){
+                    time = 9
                     oneRound()
 
                 }, 3000)
