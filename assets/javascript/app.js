@@ -23,8 +23,30 @@ $(document).ready(function(){
     let qus4 = qusFact('What is next?', 'This One', 'That one', 'That One', 'That One') 
 
     const qusBank = [qus1, qus2, qus3, qus4]
+    let timerOn = false
+    let time = 9
+    let countDown
 
-    oneRonund = function(){
+
+    function timer(){ //when called should start/stop
+        
+        
+        if(timerOn === false){
+            $('#clock').text('10')
+            countDown = setInterval(()=>{
+                $('#clock').text(time)
+                time--}, 1000)
+            timerOn = true
+        }else{
+            clearInterval(countDown) 
+            timerOn = false
+        }
+        
+    }
+
+    oneRound = function(){
+        
+        timer()
          let rndQus= qusBank[Math.floor(Math.random()*qusBank.length)]
          let rdAns= rndQus.ans
          let rndQusArr = [rndQus.ans, rndQus.wro1, rndQus.wro2, rndQus.wro3]
@@ -35,20 +57,24 @@ $(document).ready(function(){
         } while(rndQusArr.length > 0)
 
         $('#ansQusText').text(rndQus.qus)
-        $('#ansOptions1').text(randomArr[0])
-        $('#ansOptions2').text(randomArr[1])
-        $('#ansOptions3').text(randomArr[2])
-        $('#ansOptions4').text(randomArr[3])
+        $('#ansOption1').text(randomArr[0])
+        $('#ansOption2').text(randomArr[1])
+        $('#ansOption3').text(randomArr[2])
+        $('#ansOption4').text(randomArr[3])
 
-         console.log(rndQusArr)
-         console.log(randomArr)
+        $('.ansOption').click(timer)
+        $('.ansOption').click(()=> console.log(timerOn))
+
+        
+
+         
     }
     
     
     //starts game
     $('#clock').click(function(){
         $(this).unbind()
-        oneRonund()
+        oneRound()
          
     })
     
