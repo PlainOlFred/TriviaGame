@@ -23,6 +23,7 @@ $(document).ready(function(){
     let qus4 = qusFact('What is next?', 'This One', 'That one', 'That One', 'That One') 
 
     const qusBank = [qus1, qus2, qus3, qus4]
+    let qusCorrect = 0
     let timerOn = false
     let time = 9
     let countDown
@@ -56,14 +57,32 @@ $(document).ready(function(){
          randomArr.push(rndQusArr.splice(Math.floor(Math.random()*rndQusArr.length),1))
         } while(rndQusArr.length > 0)
 
-        $('#ansQusText').text(rndQus.qus)
+        $('#qusAnsText').html(`<h1>${rndQus.qus}</h1>`)
         $('#ansOption1').text(randomArr[0])
         $('#ansOption2').text(randomArr[1])
         $('#ansOption3').text(randomArr[2])
         $('#ansOption4').text(randomArr[3])
 
-        $('.ansOption').click(timer)
-        $('.ansOption').click(()=> console.log(timerOn))
+       
+        $('.ansOption').click(function(){
+            timer()
+            let userGuess = $(this).text()
+            
+            if(userGuess == rdAns){
+                $('.ansOption').unbind()
+                $('#qusAnsText').html('<h1>Correct</h1>')
+                console.log('yes')
+                qusCorrect += 1
+            } else{
+                $('.ansOption').unbind()
+                $('#qusAnsText').html(`<h1>Wrong. Correct Answer: ${rdAns}</h1>`)
+            }
+
+            //set time out => time = 9 oneRound
+        })
+        
+        
+        
 
         
 
