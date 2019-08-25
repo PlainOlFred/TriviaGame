@@ -58,12 +58,18 @@ $(document).ready(function(){
         
         let rdArr = [qusBank[rnQus].ans, qusBank[rnQus].wro1, qusBank[rnQus].wro2, qusBank[rnQus].wro3]
         let rdAns = rdArr[0]//this round answer
+
+        let rnRdArr=[]; 
+
+        do{
+            rnRdArr.push(rdArr.splice(Math.floor(Math.random()*rdArr.length),1))
+        } while(rdArr.length >0)
         
     
-        $('#ansOptions1').text(rdArr[0])
-        $('#ansOptions2').text(rdArr[2])
-        $('#ansOptions3').text(rdArr[1])
-        $('#ansOptions4').text(rdArr[3])
+        $('#ansOptions1').text(rnRdArr[0])
+        $('#ansOptions2').text(rnRdArr[2])
+        $('#ansOptions3').text(rnRdArr[1])
+        $('#ansOptions4').text(rnRdArr[3])
 
         $('.ansOption').click(function(){
             
