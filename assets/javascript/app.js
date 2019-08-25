@@ -23,10 +23,12 @@ $(document).ready(function(){
     let qus4 = qusFact('What is next?', 'This One', 'That one', 'That One', 'That One') 
 
     const qusBank = [qus1, qus2, qus3, qus4]
+    const usedQus = []
     let qusCorrect = 0
     let timerOn = false
     let time = 9
-    let countDown
+    let countDown //timer interval
+    let roundTime // round timeout
 
 
     function timer(){ //when called should start/stop
@@ -48,7 +50,11 @@ $(document).ready(function(){
     oneRound = function(){
         
         timer()
-         let rndQus= qusBank[Math.floor(Math.random()*qusBank.length)]
+        randomNum = Math.floor(Math.random()*qusBank.length)
+         let rndQus= qusBank[randomNum]
+         usedQus.push(qusBank.splice(randomNum,1))
+         
+
          let rdAns= rndQus.ans
          let rndQusArr = [rndQus.ans, rndQus.wro1, rndQus.wro2, rndQus.wro3]
 
@@ -68,7 +74,7 @@ $(document).ready(function(){
             timer()
             let userGuess = $(this).text()
             
-            if(userGuess == rdAns){
+            if(userGuess == rdAns && time >0){
                 $('.ansOption').unbind()
                 $('#qusAnsText').html('<h1>Correct</h1>')
                 console.log('yes')
@@ -77,10 +83,21 @@ $(document).ready(function(){
                 $('.ansOption').unbind()
                 $('#qusAnsText').html(`<h1>Wrong. Correct Answer: ${rdAns}</h1>`)
             }
+            if(qusBank.length === 0){
 
-            //set time out => time = 9 oneRound
+            }else{
+                setTimeout(function(){
+                    oneRound()
+
+                }, 3000)
+            }
         })
-        
+
+        roundTime = setTimeout(function(){
+            timer()
+            $('.ansOption').unbind()
+            console.log('time up')
+        }, 10000)
         
         
 
