@@ -24,84 +24,33 @@ $(document).ready(function(){
 
     const qusBank = [qus1, qus2, qus3, qus4]
 
+    oneRonund = function(){
+         let rndQus= qusBank[Math.floor(Math.random()*qusBank.length)]
+         let rdAns= rndQus.ans
+         let rndQusArr = [rndQus.ans, rndQus.wro1, rndQus.wro2, rndQus.wro3]
 
-    let gameStart=false;
-    //timer
-    const timer = new Array(10).fill(0).map((x,index) => index).reverse()
-    let countDown = function(){
-        setInterval(()=>$('#clockButton').text(timer.shift()), 1000)
-    }
-    let stopCountDown = function (){
+         let randomArr= []
+         do{
+         randomArr.push(rndQusArr.splice(Math.floor(Math.random()*rndQusArr.length),1))
+        } while(rndQusArr.length > 0)
 
-    }
+        $('#ansQusText').text(rndQus.qus)
+        $('#ansOptions1').text(randomArr[0])
+        $('#ansOptions2').text(randomArr[1])
+        $('#ansOptions3').text(randomArr[2])
+        $('#ansOptions4').text(randomArr[3])
 
-    let gameReady =function(){
-        $(this).html('<h4>Ready...</h4>').unbind(); 
-        setTimeout(()=>{$('#clockButton').html('<h4>Set...<h4>')}, 1000)
-        setTimeout(()=>{$('#clockButton').html('<h4>Go!!!</h4>')}, 1750)
-        setTimeout(()=> oneRound(), 2000)
-        gameStart=true;  
-    }
-
-    //end of roud Modals
-    function oneRoundModal(){
-        $('.ansOption').attr('disabled','disabled')
-        $('#roundModal').css('display', 'block')
-
+         console.log(rndQusArr)
+         console.log(randomArr)
     }
     
-
-    let oneRound= function(){
-        countDown()
-        rnQus = Math.floor(Math.random()*qusBank.length)//random number for the question number
-        $('#qusAnsText').html(`<h1>${qusBank[rnQus].qus}</h1`)
-        
-        let rdArr = [qusBank[rnQus].ans, qusBank[rnQus].wro1, qusBank[rnQus].wro2, qusBank[rnQus].wro3]
-        let rdAns = rdArr[0]//this round answer
-
-        let rnRdArr=[]; 
-
-        do{
-            rnRdArr.push(rdArr.splice(Math.floor(Math.random()*rdArr.length),1))
-        } while(rdArr.length >0)
-        
     
-        $('#ansOptions1').text(rnRdArr[0])
-        $('#ansOptions2').text(rnRdArr[2])
-        $('#ansOptions3').text(rnRdArr[1])
-        $('#ansOptions4').text(rnRdArr[3])
-
-        $('.ansOption').click(function(){
-            
-            let userGuess = $(this).text()
-            if(userGuess===rdAns){
-                setTimeout(()=>{$('#qusAnsText').html(`<h1>Correct</h1`);
-                $('#actionBox').text('celebrate fool')}, 250)
-
-                
-            }else {
-                setTimeout(()=>{$('#qusAnsText').html(`Wrong: Correct Answer is ${rdAns}</h1>` )}, 250);
-                $('#actionBox').text('youfool')
-            }
-            
-
-
-
-
-            qusBank.splice(rnQus,1)
-        })
-       
-        
-        
-            
-           
-    }
-
-
-
-     
-     
-    //click to start
-    $('#clockButton').click(gameReady)
+    //starts game
+    $('#clock').click(function(){
+        $(this).unbind()
+        oneRonund()
+         
+    })
+    
     
 })
