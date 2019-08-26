@@ -22,10 +22,17 @@ $(document).ready(function(){
     let qus1 = qusFact('What is best band','Rush','not rush1', 'not rush2', 'not rush3')
     let qus2 = qusFact('whos saw it', 'Rush' , 'not me1', 'not me2' , 'not me3')
     let qus3 = qusFact('what color is the sky', 'Rush', 'red', 'red', 'red')
-    let qus4 = qusFact('What is next?', 'Rush', 'That one', 'That One', 'That One') 
+    let qus4 = qusFact('What is next?', 'Rush', 'That one', 'That One', 'That One')
+    let qus5 = qusFact('What is best band','Rush','not rush1', 'not rush2', 'not rush3')
+    let qus6 = qusFact('whos saw it', 'Rush' , 'not me1', 'not me2' , 'not me3')
+    let qus7 = qusFact('what color is the sky', 'Rush', 'red', 'red', 'red')
+    let qus8 = qusFact('What is next?', 'Rush', 'That one', 'That One', 'That One')
+    let qus9 = qusFact('what color is the sky', 'Rush', 'red', 'red', 'red')
+    let qus10 = qusFact('What is next?', 'Rush', 'That one', 'That One', 'That One')  
+
 
     
-        let qusBank = [qus1, qus2, qus3, qus4]
+        let qusBank = [qus1, qus2, qus3, qus4, qus5, qus6, qus7, qus8, qus9, qus10]
         let usedQus = []
         let qusCorrect = 0
         let qusWrong = 0
@@ -76,30 +83,32 @@ $(document).ready(function(){
         $('#ansOption3').text(randomArr[2])
         $('#ansOption4').text(randomArr[3])
 
-        function getGif(){
+        // function getGif(){
         
-            console.log('getGIf: ' + rdAns)
-            $.ajax({
-                url: gifUrl,
-                method: "GET"
+        //     console.log('getGIf: ' + rdAns)
+        //     $.ajax({
+        //         url: gifUrl,
+        //         method: "GET"
 
-            }).then(function(response){
+        //     }).then(function(response){
 
-                console.log(response)   
-                let ansGif = response.data.image_original_url;  
+        //         console.log(response)   
+        //         let ansGif = response.data.image_original_url;  
 
-                let ansGifImage = $('<img>')
+        //         let ansGifImage = $('<img>')
 
-                ansGifImage.attr("src", ansGif)
-                ansGifImage.attr("alt", "image")
+        //         ansGifImage.attr("src", ansGif)
+        //         ansGifImage.attr("alt", "image")
+        //         ansGifImage.addClass("gifImage")
                
-                $('#ansGif').prepend(ansGifImage)
+        //         $('#ansGif').css('display', 'inline-block').prepend(ansGifImage)
+        //         $('.gifImage').css('display', 'block')
 
                 
  
-            })
+        //     })
     
-        }
+        // }
 
        
         $('.ansOption').click(function(){
@@ -111,19 +120,19 @@ $(document).ready(function(){
                 $('.ansOption').unbind()
                 $('#qusAnsText').html('<h1>Correct</h1>')
                 qusCorrect += 1
-                getGif()
+                // getGif()
             } else{
                 $('.ansOption').unbind()
                 $('#qusAnsText').html(`<h1>Wrong. Correct Answer: ${rdAns}</h1>`)
                 qusWrong += 1
-                getGif()
+                // getGif()
             }
             if(qusBank.length === 0){
                 setTimeout(function(){
-                    $('#ansOption1').text('Number Correct: '+ qusCorrect)
-                    $('#ansOption2').text('Number Wrong: '+ qusWrong)
+                    $('#ansOption1').text('Correct: '+ qusCorrect)
+                    $('#ansOption2').text('Wrong: '+ qusWrong)
                     $('#ansOption3').text('Unanswered: ' + (usedQus.length - qusCorrect - qusWrong))
-                    $('#ansOption4').text('Play again')
+                    $('#ansOption4').text('Play again').css({'background-color':'rgba(0, 200, 0,0.7)', 'color': 'white'})
 
                     $('#ansOption4').click(()=>{
                         //restart game
@@ -133,7 +142,7 @@ $(document).ready(function(){
                         qusWrong = 0
                         timerOn = false
                         time = 9
-                    
+                        $('#ansOption4').text('Play again').css({'color':'rgba(0, 200, 0,0.7)','background-color':'white'})
                         oneRound()
                     })
                 }, 1000)
@@ -151,13 +160,13 @@ $(document).ready(function(){
             timer()
             $('.ansOption').unbind()
             $('#qusAnsText').html(`<h1>Time's Up. Correct Answer: ${rdAns}</h1>`)
-            getGif()
+            // getGif()
             if(qusBank.length === 0){
                 setTimeout(function(){
-                    $('#ansOption1').text('Number Correct: '+ qusCorrect)
-                    $('#ansOption2').text('Number Wrong: '+ qusWrong)
+                    $('#ansOption1').text('Correct: '+ qusCorrect)
+                    $('#ansOption2').text('Wrong: '+ qusWrong)
                     $('#ansOption3').text('Unanswered: ' + (usedQus.length - qusCorrect - qusWrong))
-                    $('#ansOption4').text('Play again')
+                    $('#ansOption4').text('Play again').css({'background-color':'rgba(0, 200, 0,0.7)','color':'white'})
 
                     $('#ansOption4').click(()=>{
                         //restart game
@@ -167,7 +176,7 @@ $(document).ready(function(){
                         qusWrong = 0
                         timerOn = false
                         time = 9
-                    
+                        $('#ansOption4').text('Play again').css({'color':'rgba(0, 200, 0,0.7)','background-color':'white'})
                         oneRound()
                     })
                 }, 1000)
