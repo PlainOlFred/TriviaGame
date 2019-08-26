@@ -20,9 +20,9 @@ $(document).ready(function(){
     }
     
     let qus1 = qusFact('What is best band','Rush','not rush1', 'not rush2', 'not rush3')
-    let qus2 = qusFact('whos saw it', 'Me' , 'not me1', 'not me2' , 'not me3')
-    let qus3 = qusFact('what color is the sky', 'blue', 'red', 'red', 'red')
-    let qus4 = qusFact('What is next?', 'This One', 'That one', 'That One', 'That One') 
+    let qus2 = qusFact('whos saw it', 'Rush' , 'not me1', 'not me2' , 'not me3')
+    let qus3 = qusFact('what color is the sky', 'Rush', 'red', 'red', 'red')
+    let qus4 = qusFact('What is next?', 'Rush', 'That one', 'That One', 'That One') 
 
     
         let qusBank = [qus1, qus2, qus3, qus4]
@@ -57,10 +57,12 @@ $(document).ready(function(){
         timer()
         randomNum = Math.floor(Math.random()*qusBank.length)
          let rndQus= qusBank[randomNum]
+         
          usedQus.push(qusBank.splice(randomNum,1))
          
 
          let rdAns= rndQus.ans
+         let gifUrl = `https://api.giphy.com/v1/gifs/search?api_key=efON0kuaf67AQ7xZbpJnftqbH8mQgHwh&q=${rdAns}&rating=g&limit=1`
          let rndQusArr = [rndQus.ans, rndQus.wro1, rndQus.wro2, rndQus.wro3]
 
          let randomArr= []
@@ -77,6 +79,25 @@ $(document).ready(function(){
         function getGif(){
         
             console.log('getGIf: ' + rdAns)
+            $.ajax({
+                url: gifUrl,
+                method: "GET"
+
+            }).then(function(response){
+
+                console.log(response)   
+                let ansGif = response.data.image_original_url;  
+
+                let ansGifImage = $('<img>')
+
+                ansGifImage.attr("src", ansGif)
+                ansGifImage.attr("alt", "image")
+               
+                $('#ansGif').prepend(ansGifImage)
+
+                
+ 
+            })
     
         }
 
