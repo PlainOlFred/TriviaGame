@@ -35,10 +35,8 @@ $(document).ready(function(){
         let roundTime // round timeout
     
 
-
     function timer(){ //when called should start/stop
-        
-        
+           
         if(timerOn === false){
             $('#clock').text('10')
             countDown = setInterval(()=>{
@@ -51,6 +49,8 @@ $(document).ready(function(){
         }
         
     }
+
+    
 
     oneRound = function(){
         
@@ -74,6 +74,12 @@ $(document).ready(function(){
         $('#ansOption3').text(randomArr[2])
         $('#ansOption4').text(randomArr[3])
 
+        function getGif(){
+        
+            console.log('getGIf: ' + rdAns)
+    
+        }
+
        
         $('.ansOption').click(function(){
             timer()
@@ -84,10 +90,12 @@ $(document).ready(function(){
                 $('.ansOption').unbind()
                 $('#qusAnsText').html('<h1>Correct</h1>')
                 qusCorrect += 1
+                getGif()
             } else{
                 $('.ansOption').unbind()
                 $('#qusAnsText').html(`<h1>Wrong. Correct Answer: ${rdAns}</h1>`)
                 qusWrong += 1
+                getGif()
             }
             if(qusBank.length === 0){
                 setTimeout(function(){
@@ -121,7 +129,8 @@ $(document).ready(function(){
         roundTime = setTimeout(function(){
             timer()
             $('.ansOption').unbind()
-
+            $('#qusAnsText').html(`<h1>Time's Up. Correct Answer: ${rdAns}</h1>`)
+            getGif()
             if(qusBank.length === 0){
                 setTimeout(function(){
                     $('#ansOption1').text('Number Correct: '+ qusCorrect)
@@ -143,15 +152,13 @@ $(document).ready(function(){
                 }, 1000)
 
             }else{
+
                 setTimeout(function(){ //next question
                     time = 9
                     oneRound()
                 }, 3000)
             }
-        
-            
-           
-      
+          
         }, 10000)
         
          
