@@ -4,17 +4,16 @@ const questionCount = document.querySelector("#questionCount");
 const questionLeft  = document.querySelector("#questionCount span");
 const instructions = document.querySelector("#instructions");
 
+const clock = document.querySelector('#clock');
+
 const questionText = document.querySelector("#questionText");
 const answerChoices = document.querySelector("#answerChoices");
 
+let isTimer = false;
+let timerId;
+let timer;
 
-let usedQus = [];
-let qusCorrect = 0;
-let qusWrong = 0;
-let timerOn = false;
-let time = 9;
-let countDown; //timer interval
-let roundTime; // round timeout
+
 
 
 // let gifUrl = `https://api.giphy.com/v1/gifs/search?api_key=efON0kuaf67AQ7xZbpJnftqbH8mQgHwh&q=${rdAns}&rating=g&limit=1`;
@@ -39,7 +38,39 @@ function getGif() {
   });
 }
 
+function handleTimer() {
+  clock.textContent = timer;
+  if(isTimer) {
+    clearInterval(timerId)
+    console.log("timer clear")
+    isTimer = false;
+  } else {
+    timerId = setInterval(tick, 1000);
+    isTimer = true;
+  }
+
+}
+
+function tick() {
+  console.log("tick");
+  timer--;
+
+  if(timer <= 0) {
+    handleTimer();
+    return oneRound();
+  } 
+
+  clock.textContent = timer;
+}
+
+
+
 function oneRound() {
+  timer = 10;
+  // clock.textContent = timer;
+
+  // check question
+  handleTimer();
   
   const rndQus = Math.floor(Math.random() * questions.length);
    
@@ -105,4 +136,10 @@ function startQuiz() {
 
 }
 
+function handleChoiceClick() {
+  handleTimer();
+}
+
 startBtn.addEventListener("click", startQuiz);
+
+answerChoices.addEventListener("click", handleChoiceClick);
