@@ -3,45 +3,43 @@
 }
 
 
-#pageTitle{
+header h1{
     color: rgba(0, 200, 0, .7);
     padding:0 10px;
     margin: 0;
-    font-size: 42pt;
-
-    
+    font-size: 42pt;   
 }
 
 #gameBox{
     height: 60%;
     width: 80%;
     margin:  0 auto;
-    padding: 50px;
-    
-    
+    padding: 0px;
+  
 }
-#clock{
+.game{
     text-align: center;
-    color: rgba(0, 200, 0, .7);
+    color: rgba(0, 200, 0, .7);  
+}
+
+.hide {
+    display: none;
 }
 
 #gameBox > *{
     margin: 30px;
 }
 
-#qusAnsText{
-    text-align: center;
-    color: rgba(0, 200, 0, .7);
-}
 
-#actionBox{
-    width: 33%;
+
+#answerChoices{
+    width: 50%;
     margin: 0 auto;
 }
 
    
 
-.ansOption{
+.answerChoice{
     border: 2px solid rgba(0, 200, 0, .5);
     border-radius: 10px;
     color: rgba(0, 200, 0, .7);
@@ -53,7 +51,7 @@
     cursor: pointer;
 }
 
-.ansOption:hover{
+.ansChoice:hover{
     border: 2px solid rgba(0, 200, 0)
 }
 

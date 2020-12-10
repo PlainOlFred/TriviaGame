@@ -5,27 +5,33 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="X-UA-Compatible" content="ie=edge/">
-        <link rel="stylesheet" href="assets/css/style.css"/>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-        <title>Triva Game</title>
+        
         <link href="https://fonts.googleapis.com/css?family=Orbitron&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="assets/css/style.css"/>
+        <title>Triva Game</title>
     </head>
 
     <body>
-       
-        <h1 id="pageTitle">AUSTIN, TEXAS</h1>
+       <header>
+            <h1 id="pageTitle">AUSTIN, TEXAS</h1>
+       </header>
+
+        <div id="gameInfo">
+            <h1 id="instructions">Press start for first Qusetion</h1>
+            <h1 id="questionCount" class="hide">Questions Remaining: <span></span></h1>
+            <h3>Top Players</h3>
+            <ul>
+                <li>top player</li>
+                <li>middle player</li>
+                <li>bottom player</li>
+            </ul>
+        </div>
+
+
         <div id="gameBox">
-            <div id="qusAnsText"><h1>Press start for first Qusetion</h1></div>
-            <h4 id="clock">Click Here to Start Game</h4>
-            <div id="ansOptions">
-                <div id="actionBox">
-                        <p class="ansOption" id="ansOption1">Tirva</p>
-                        <p class="ansOption" id="ansOption2">Trivia</p>
-                        <p class="ansOption" id="ansOption3">Triva</p>
-                        <p class="ansOption" id="ansOption4">Triva</p>
-                </div>
-                
-            </div>
+            <h4 id="startBtn" class="game">START</h4>
+            <h2 id="questionText" class="game"></h2>
+            <div id="answerChoices"></div>
         </div>
         
     </body>
